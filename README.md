@@ -29,7 +29,9 @@ Things you may want to cover:
 
 | Column                | Type   | Options     |
 | --------------------- | ------ | ----------- |
-| encrypted_password   | string | null: false |
+| nickname              | string | null: false |
+| password              | string | null: false |
+| encrypted_password    | string | null: false |
 | last-name             | string | null: false |
 | first-name            | string | null: false |
 | last-name-kana        | string | null: false |
@@ -49,11 +51,11 @@ Things you may want to cover:
 | --------------------- | ------ | ----------- |
 | item-name             | string | null: false |
 | item-info             | text   | null: false |
-| item-category         | string | null: false |
-| item-sales-status     | string | null: false |
-| item-shipping-fee     | string | null: false |
-| item-shipping-area    | string | null: false |
-| item-days-to-ship     | string | null: false |
+| item-category_id         | integer | null: false |
+| item-status_id           | integer | null: false |
+| item-shipping-fee_id     | integer| null: false |
+| item-shipping-area_id    | integer | null: false |
+| item-day-to-ship_id     | integer | null: false |
 | item-price            | string | null: false |
 | user                  |references| null: false, foreign_key: true  |
 
