@@ -29,21 +29,17 @@ Things you may want to cover:
 
 | Column                | Type   | Options     |
 | --------------------- | ------ | ----------- |
-| nickname              | string | null: false |
-| email                 | string | null: false |
-| password              | string | null: false |
+| encrypted_password   | string | null: false |
 | last-name             | string | null: false |
 | first-name            | string | null: false |
 | last-name-kana        | string | null: false |
 | first-name-kana       | string | null: false |
-| user_birth_date_1     | string | null: false |
-| user_birth_date_2     | string | null: false |
-| user_birth_date_3     | string | null: false |
+| user_birth_date       | date   | null: false |
 
 ### Association
 
 - has_many :items
-- has_one  :buyers
+- has_many :buyers
 
 
 
@@ -51,16 +47,15 @@ Things you may want to cover:
 
 | Column                | Type   | Options     |
 | --------------------- | ------ | ----------- |
-| image                 | string | null: false |
 | item-name             | string | null: false |
-| item-info             | text   | null: false |         
+| item-info             | text   | null: false |
 | item-category         | string | null: false |
 | item-sales-status     | string | null: false |
 | item-shipping-fee     | string | null: false |
 | item-shipping-area    | string | null: false |
 | item-days-to-ship     | string | null: false |
 | item-price            | string | null: false |
-| user                  |references|           |
+| user                  |references| null: false, foreign_key: true  |
 
 
 
@@ -78,8 +73,8 @@ Things you may want to cover:
 | card-exp-month        | string | null: false |
 | card-exp-year         | string | null: false |
 | card-cvc              | string | null: false |
-| user                  |references|           |
-| item                  |references|           |
+| user                  |references| null: false, foreign_key: true  |
+| item                  |references| null: false, foreign_key: true  |
 
 ### Association
 
@@ -97,9 +92,10 @@ Things you may want to cover:
 | prefecture            | string | null: false |
 | city                  | text   | null: false |
 | addresses             | text   | null: false |
-| building              | text   | null: false |
+| building              | text   |             |
 | phone-number          | string | null: false |
 | buyer                 |references|           |
+
 ### Association
 
-- belongs_to :buyers
+- belongs_to :buyer
