@@ -30,6 +30,7 @@ Things you may want to cover:
 | Column                | Type   | Options     |
 | --------------------- | ------ | ----------- |
 | nickname              | string | null: false |
+| email                 | string | null: false |
 | encrypted_password    | string | null: false |
 | last_name             | string | null: false |
 | first_name            | string | null: false |
@@ -39,8 +40,8 @@ Things you may want to cover:
 
 ### Association
 
-- has_many :item
-- has_many :buyer
+- has_many :items
+- has_many :buyers
 
 
 
@@ -55,7 +56,7 @@ Things you may want to cover:
 | shipping_fee_id       | integer| null: false |
 | shipping_area_id      | integer | null: false |
 | day_to_ship_id        | integer | null: false |
-| price                 | string | null: false |
+| price                 | integer | null: false |
 | user                  |references| null: false, foreign_key: true  |
 
 
@@ -86,12 +87,12 @@ Things you may want to cover:
 | Column                | Type   | Options     |
 | --------------------- | ------ | ----------- |
 | postal_code           | string | null: false |
-| prefecture            | string | null: false |
-| city                  | text   | null: false |
-| addresses             | text   | null: false |
-| building              | text   |             |
+| shipping_area_id      | string | null: false |
+| city                  | string | null: false |
+| addresses             | string | null: false |
+| building              | string |             |
 | phone_number          | string | null: false |
-| buyer                 |references|           |
+| buyer                 |references| null: false, foreign_key: true |
 
 ### Association
 
