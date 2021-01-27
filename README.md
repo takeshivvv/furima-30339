@@ -30,18 +30,17 @@ Things you may want to cover:
 | Column                | Type   | Options     |
 | --------------------- | ------ | ----------- |
 | nickname              | string | null: false |
-| password              | string | null: false |
 | encrypted_password    | string | null: false |
-| last-name             | string | null: false |
-| first-name            | string | null: false |
-| last-name-kana        | string | null: false |
-| first-name-kana       | string | null: false |
-| user_birth_date       | date   | null: false |
+| last_name             | string | null: false |
+| first_name            | string | null: false |
+| last_name_kana        | string | null: false |
+| first_name_kana       | string | null: false |
+| birth_date            | date   | null: false |
 
 ### Association
 
-- has_many :items
-- has_many :buyers
+- has_many :item
+- has_many :buyer
 
 
 
@@ -49,39 +48,35 @@ Things you may want to cover:
 
 | Column                | Type   | Options     |
 | --------------------- | ------ | ----------- |
-| item-name             | string | null: false |
-| item-info             | text   | null: false |
-| item-category_id         | integer | null: false |
-| item-status_id           | integer | null: false |
-| item-shipping-fee_id     | integer| null: false |
-| item-shipping-area_id    | integer | null: false |
-| item-day-to-ship_id     | integer | null: false |
-| item-price            | string | null: false |
+| name                  | string | null: false |
+| info                  | text   | null: false |
+| category_id           | integer | null: false |
+| status_id             | integer | null: false |
+| shipping_fee_id       | integer| null: false |
+| shipping_area_id      | integer | null: false |
+| day_to_ship_id        | integer | null: false |
+| price                 | string | null: false |
 | user                  |references| null: false, foreign_key: true  |
 
 
 
 ### Association
 
-- belongs_to :users
-- has_one    :buyers
+- belongs_to :user
+- has_one    :buyer
 
 
 ## buyers テーブル
 
 | Column                | Type   | Options     |
 | --------------------- | ------ | ----------- |
-| card-number           | string | null: false |
-| card-exp-month        | string | null: false |
-| card-exp-year         | string | null: false |
-| card-cvc              | string | null: false |
 | user                  |references| null: false, foreign_key: true  |
 | item                  |references| null: false, foreign_key: true  |
 
 ### Association
 
-- belongs_to :users
-- belongs_to :items
+- belongs_to :user
+- belongs_to :item
 - has_one    :shipping-address
 
 
@@ -90,12 +85,12 @@ Things you may want to cover:
 
 | Column                | Type   | Options     |
 | --------------------- | ------ | ----------- |
-| postal-code           | string | null: false |
+| postal_code           | string | null: false |
 | prefecture            | string | null: false |
 | city                  | text   | null: false |
 | addresses             | text   | null: false |
 | building              | text   |             |
-| phone-number          | string | null: false |
+| phone_number          | string | null: false |
 | buyer                 |references|           |
 
 ### Association
