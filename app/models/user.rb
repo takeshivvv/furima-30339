@@ -5,20 +5,23 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   
   
-  
-  validates :nickname, presence: true
-  validates :last_name, presence: true
-  validates :first_name, presence: true
-  validates :last_name_kana, presence: true
-  validates :first_name_kana, presence: true
-  validates :birth_date, presence: true
- 
+  with_options presence: true do
+    validates :nickname
+    validates :last_name
+    validates :first_name
+    validates :last_name_kana
+    validates :first_name_kana
+    validates :birth_date
+  end
+
   has_many :items
   has_many :buyers
 
-  #with_options presence: true do
-    #validates :name, format: { with: /\A[ぁ-んァ-ン一-龥]/, message: "is invalid. Input full-width characters."}
+  with_options presence: true do
+    validates :last_name,:first_name, format: { with: /\A[ぁ-んァ-ン一-龥]/, message: "is invalid. Input full-width characters."}
     validates :last_name_kana,:first_name_kana, format: { with: /\A[ァ-ヶー－]+\z/, message: "is invalid. Input full-width katakana characters."}
-    #validates :nickname, format: { with: /\A[a-z0-9]+\z/i, message: "is invalid. Input half-width characters."}
-  #end
+    validates :password, format: { with: /\A[a-z0-9]+\z/i, message: "is invalid. Input half-width characters."}
+    validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i, message: "is invalid. Input number and alphabet characters."}
+  end
 end
+#Faker::Lorem.characters(min_alpha: 1, min_numric: 1)

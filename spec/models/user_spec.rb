@@ -9,11 +9,7 @@ require 'rails_helper'
       it "nicknameとemailとpasswordとpassword_confirmationとlast_nameとfirst_nameとlast_name_kanaとfirst_name_kana、birth_dateが存在すれば登録できる" do
         expect(@user).to be_valid
       end
-      it "passwordが6文字以上であれば登録できる" do
-        @user.password = "000000"
-        @user.password_confirmation = "000000"
-        expect(@user).to be_valid
-      end
+      
     end
     
     context '新規登録がうまくいかないとき' do
@@ -89,6 +85,48 @@ require 'rails_helper'
         @user.valid?
         expect(@user.errors.full_messages).to include("Birth date can't be blank")
       end
+
+      it "passwordがからの時登録できない" do
+        @user.password = ""
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password can't be blank")
+      end
+      it "passwordが英語のみでは登録できない" do
+        @user.password = "aaaaaa"
+        @user.password_confirmation = "aaaaaa"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password is invalid. Input number and alphabet characters.")
+      end
+      it "passwordが数字のみでは登録でいない" do
+        @user.password = "111111"
+        @user.password_confirmation = "111111"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password is invalid. Input number and alphabet characters.")
+      end
+      it "passwordが全角では登録できない" do
+        @user.password = "ああああああ"
+        @user.password_confirmation = "ああああああ"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password is invalid. Input half-width characters.")
+
+      end
+      it "emailに＠がないと登録できない" do
+        @user.email = "111a111"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Email is invalid")
+      end
+      it "first_nameが漢字・平仮名・カタカナ以外では登録できないこと" do
+        @user.first_name = "******"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First name is invalid. Input full-width characters.")
+      end
+      it "last_nameが漢字・平仮名・カタカナ以外では登録できないこと" do
+        @user.last_name = "******"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Last name is invalid. Input full-width characters.")
+      end
+
+
     end
   end
 end
