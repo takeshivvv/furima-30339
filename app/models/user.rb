@@ -24,4 +24,3 @@ class User < ApplicationRecord
     validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i, message: "is invalid. Input number and alphabet characters."}
   end
 end
-#Faker::Lorem.characters(min_alpha: 1, min_numric: 1)
