@@ -16,14 +16,14 @@ class ItemsController < ApplicationController
       render :new
     end
 
-    def destroy
-     if @item.destroy
-      redirect_to root_path
-    else
-      redirect_to root_path
-    end
+    #def destroy
+     #if @item.destroy
+      #redirect_to root_path
+    #else
+      #redirect_to root_path
+    #end
     
-  end
+  #end
 end
   private
 
