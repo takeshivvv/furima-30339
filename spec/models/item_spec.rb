@@ -31,31 +31,31 @@ end
   end
 
   it "category_idが空だと登録出来ない" do
-    @item.category_id = "1"
+    @item.category_id = 1
     @item.valid?
     expect(@item.errors.full_messages).to include("Category must be other than 1")
   end
 
   it "status_idが空だと登録出来ない" do
-    @item.status_id = "1"
+    @item.status_id = 1
     @item.valid?
     expect(@item.errors.full_messages).to include("Status must be other than 1")
   end
 
   it "shipping_fee_idが空だと登録できない" do
-    @item.shipping_fee_id = "1"
+    @item.shipping_fee_id = 1
     @item.valid?
     expect(@item.errors.full_messages).to include("Shipping fee must be other than 1")
   end
 
   it "shipping_area_idが空だと登録できない" do
-    @item.shipping_area_id = "1"
+    @item.shipping_area_id = 1
     @item.valid?
     expect(@item.errors.full_messages).to include("Shipping area must be other than 1")
   end
 
   it "day_to_ship_idが空だと登録できない" do
-    @item.day_to_ship_id = "1"
+    @item.day_to_ship_id = 1
     @item.valid?
     expect(@item.errors.full_messages).to include("Day to ship must be other than 1")
   end
@@ -66,17 +66,35 @@ end
     expect(@item.errors.full_messages).to include("Price is not a number")
   end
 
-  it "priceは¥300以上9,999,999円以下でないと登録できない" do
-    @item.price = "111"
+  it "priceは300円以下では出品できない" do
+    @item.price = 111
     @item.valid?
     expect(@item.errors.full_messages).to include("Price must be greater than or equal to 300")
     end
+
+  it "priceは10000000円以上では出品できない" do
+    @item.price = 100000000
+    @item.valid?
+    expect(@item.errors.full_messages).to include("Price must be less than or equal to 9999999")
+  end
 
   it "priceは半角数字でないと登録できない" do
     @item.price = "１１"
     @item.valid?
     expect(@item.errors.full_messages).to include("Price is not a number")
   end
+
+  it "priceは半角英数字混合では出品できない" do
+  @item.price = "11eee"
+  @item.valid?
+  expect(@item.errors.full_messages).to include("Price is not a number")
+end
+
+  it "priceは半角英字のみでは出品できない" do
+  @item.price = "wwwwww"
+  @item.valid?
+  expect(@item.errors.full_messages).to include("Price is not a number")
+end
 
 end
 end

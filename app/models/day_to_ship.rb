@@ -6,5 +6,5 @@ class DayToShip < ActiveHash::Base
    { id: 4, day_to_ship: '4~7日で発送' }
   ]
   include ActiveHash::Associations
-  belongs_to :item
+  has_many :items
 end

@@ -1,8 +1,8 @@
 class ItemsController < ApplicationController
-
-  def index
-    @items = Item.all
-  end
+  before_action :authenticate_user!, except: [:index]
+  #def index
+    #items = Item.all
+  #end
   
   def new
    @item = Item.new
@@ -16,9 +16,15 @@ class ItemsController < ApplicationController
       render :new
     end
 
+    def destroy
+     if @item.destroy
+      redirect_to root_path
+    else
+      redirect_to root_path
+    end
     
   end
-
+end
   private
 
   def item_params
