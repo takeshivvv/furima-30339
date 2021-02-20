@@ -39,7 +39,6 @@
     <% end %>
 
     <%# //ログインしているユーザーと出品しているユーザーが、同一人物の場合と同一人物ではない場合で、処理を分けましょう %>
-    <% if user_signed_in? && current_user.id == @item.user_id %>
     <div class="item-explain-box">
       <span><%= @item.info %></span>
     </div>
@@ -71,7 +70,6 @@
         </tr>
       </tbody>
     </table>
-    <% end %>
     <div class="option">
       <div class="favorite-btn">
         <%= image_tag "star.png" ,class:"favorite-star-icon" ,width:"20",height:"20"%>
