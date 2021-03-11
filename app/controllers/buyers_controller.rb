@@ -3,7 +3,12 @@ class BuyersController < ApplicationController
   
   def index
     @item = Item.find(params[:item_id])
+    # ログインしているユーザーと出品者
+    if current_user.id == @item.user.id && @item.buyer.blank?
+      redirect_to root_path
+    end
     @buyer = BuyerForm.new
+    
   end
 
   def create
