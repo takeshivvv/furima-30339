@@ -55,7 +55,7 @@ end
   end
 
   it "postal_codeはハイフンなしでは登録できない" do
-    @buyer_form.postal_code = 1234567
+    @buyer_form.postal_code = "1234567"
     @buyer_form.valid?
     expect(@buyer_form.errors.full_messages).to include("Postal code ハイフンが必要である")
   end

@@ -13,6 +13,9 @@ class BuyersController < ApplicationController
 
   def create
     @buyer = BuyerForm.new(set_params)
+    if current_user.id == @item.user.id || @item.buyer.present?
+      redirect_to root_path
+    end
     if @buyer.valid?
       pay_item
       @buyer.save
