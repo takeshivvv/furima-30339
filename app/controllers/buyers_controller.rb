@@ -1,21 +1,15 @@
 class BuyersController < ApplicationController
   before_action :authenticate_user!
   before_action :buyer_item, only: [:create, :index]
-  
+  before_action :contributor_confirmation, only: [:create, :index ]
   def index
-    # ログインしているユーザーと出品者
-    if current_user.id == @item.user.id || @item.buyer.present?
-      redirect_to root_path
-    end
+
     @buyer = BuyerForm.new
     
   end
 
   def create
     @buyer = BuyerForm.new(set_params)
-    if current_user.id == @item.user.id || @item.buyer.present?
-      redirect_to root_path
-    end
     if @buyer.valid?
       pay_item
       @buyer.save
@@ -41,6 +35,12 @@ class BuyersController < ApplicationController
       card: set_params[:token],    # カードトークン
       currency: 'jpy'                 # 通貨の種類（日本円）
     )
+  end
+
+  def contributor_confirmation
+    if current_user.id == @item.user.id || @item.buyer.present?
+      redirect_to root_path
+    end
   end
 
 end

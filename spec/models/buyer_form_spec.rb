@@ -74,6 +74,15 @@ end
     expect(@buyer_form.errors.full_messages).to include("Phone number 数字のみ登録可")
   end
 
+  it "phone_numberは全角数字だと登録できない" do
+    @buyer_form.phone_number = "１２３４５"
+    @buyer_form.valid?
+    expect(@buyer_form.errors.full_messages).to include("Phone number 数字のみ登録可")
+  end
+
+
+
+
   it "phone_numberは12桁以上では登録できない" do
     @buyer_form.phone_number = "12312312312312312"
     @buyer_form.valid?
