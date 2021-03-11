@@ -10,9 +10,14 @@ RSpec.describe BuyerForm, type: :model do
 
 describe "商品購入機能" do
   context "商品購入がうまく出来た時" do
-  it "postal_codeとshipping_area_idとcityとaddressesとphone_numberがあれば購入できる" do
-  expect(@buyer_form).to be_valid
-      end
+    it "postal_codeとshipping_area_idとcityとaddressesとphone_numberがあれば購入できる" do
+      expect(@buyer_form).to be_valid
+    end
+
+  it "buildingが空でも登録できる" do
+    @buyer_form.building = ""
+    expect(@buyer_form).to be_valid
+  end
 end
 
 

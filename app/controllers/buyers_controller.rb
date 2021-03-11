@@ -1,8 +1,8 @@
 class BuyersController < ApplicationController
   before_action :authenticate_user!
+  before_action :buyer_item, only: [:create, :index]
   
   def index
-    @item = Item.find(params[:item_id])
     # ログインしているユーザーと出品者
     if current_user.id == @item.user.id || @item.buyer.present?
       redirect_to root_path
@@ -12,7 +12,6 @@ class BuyersController < ApplicationController
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @buyer = BuyerForm.new(set_params)
     if @buyer.valid?
       pay_item
@@ -28,6 +27,10 @@ class BuyersController < ApplicationController
     params.require(:buyer_form).permit(:postal_code, :shipping_area_id, :city, :addresses, :building, :phone_number, :buyer_id).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
   end
 
+  def buyer_item
+    @item = Item.find(params[:item_id])
+  end
+
   def pay_item
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]  # 自身のPAY.JPテスト秘密鍵を記述しましょ
     Payjp::Charge.create(
@@ -38,27 +41,3 @@ class BuyersController < ApplicationController
   end
 
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
