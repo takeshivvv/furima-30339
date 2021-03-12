@@ -19,7 +19,7 @@ class BuyerForm
 
   validates :phone_number, numericality: { message: "数字のみ登録可"}
   validates :phone_number, length: {maximum: 11}
-  #validates :phone_number, format: {with: /\A[0-9]\z/, message: "全角数字では登録できない" }
+  
   
   validates :postal_code, format: { with: /\A\d{3}[-]\d{4}\z/, message: "ハイフンが必要である"}
   
